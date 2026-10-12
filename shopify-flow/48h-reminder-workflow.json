@@ -1,0 +1,113 @@
+{
+  "name": "Luxe Bridal - 48-Hour Flexible Measurement Automation",
+  "description": "Monitors custom bespoke bridal orders and automates WhatsApp/Email reminders during the 48-hour grace window",
+  "version": "1.0.0",
+  "trigger": {
+    "type": "shopify/orders/created",
+    "description": "Triggered when a customer completes payment for an order"
+  },
+  "workflow_steps": [
+    {
+      "step_id": "step_1_check_sizing_mode",
+      "type": "condition",
+      "expression": "order.lineItems.any(item => item.customAttributes['_SizingMode'] == 'Custom Bespoke')",
+      "if_true": "step_2_send_initial_welcome",
+      "if_false": "step_end"
+    },
+    {
+      "step_id": "step_2_send_initial_welcome",
+      "type": "action",
+      "action_type": "send_external_webhook",
+      "description": "Dispatch immediate WhatsApp/Email welcome with personalized measurement link",
+      "endpoint": "https://api.whatsapp.com/v1/messages",
+      "payload": {
+        "to": "{{ order.customer.phone }}",
+        "template": "bridal_bespoke_welcome",
+        "params": {
+          "order_name": "{{ order.name }}",
+          "customer_first_name": "{{ order.customer.firstName }}",
+          "measurement_url": "https://{{ shop.domain }}/apps/measurements?token={{ order.id | hmac_sha256 }}"
+        }
+      },
+      "next": "step_3_wait_24_hours"
+    },
+    {
+      "step_id": "step_3_wait_24_hours",
+      "type": "wait",
+      "duration": "24h",
+      "next": "step_4_check_measurement_status_24h"
+    },
+    {
+      "step_id": "step_4_check_measurement_status_24h",
+      "type": "condition",
+      "expression": "order.metafields.bridal.measurement_status != 'VERIFIED'",
+      "if_true": "step_5_send_24h_nudge",
+      "if_false": "step_end"
+    },
+    {
+      "step_id": "step_5_send_24h_nudge",
+      "type": "action",
+      "action_type": "send_external_webhook",
+      "description": "Send gentle 24-hour reminder with 24 hours remaining on artisan slot",
+      "endpoint": "https://api.whatsapp.com/v1/messages",
+      "payload": {
+        "to": "{{ order.customer.phone }}",
+        "template": "bridal_24h_reminder",
+        "params": {
+          "order_name": "{{ order.name }}",
+          "hours_remaining": "24"
+        }
+      },
+      "next": "step_6_wait_16_hours"
+    },
+    {
+      "step_id": "step_6_wait_16_hours",
+      "type": "wait",
+      "duration": "16h",
+      "next": "step_7_check_measurement_status_40h"
+    },
+    {
+      "step_id": "step_7_check_measurement_status_40h",
+      "type": "condition",
+      "expression": "order.metafields.bridal.measurement_status != 'VERIFIED'",
+      "if_true": "step_8_send_urgent_8h_alert",
+      "if_false": "step_end"
+    },
+    {
+      "step_id": "step_8_send_urgent_8h_alert",
+      "type": "action",
+      "action_type": "send_external_webhook",
+      "description": "Send urgent alert: 8 hours remaining to preserve original delivery timeline",
+      "endpoint": "https://api.whatsapp.com/v1/messages",
+      "payload": {
+        "to": "{{ order.customer.phone }}",
+        "template": "bridal_urgent_8h_alert",
+        "params": {
+          "order_name": "{{ order.name }}",
+          "hours_remaining": "8"
+        }
+      },
+      "next": "step_9_wait_8_hours"
+    },
+    {
+      "step_id": "step_9_wait_8_hours",
+      "type": "wait",
+      "duration": "8h",
+      "next": "step_10_handle_delayed_measurements"
+    },
+    {
+      "step_id": "step_10_handle_delayed_measurements",
+      "type": "condition",
+      "expression": "order.metafields.bridal.measurement_status != 'VERIFIED'",
+      "if_true": "step_11_tag_delayed_order",
+      "if_false": "step_end"
+    },
+    {
+      "step_id": "step_11_tag_delayed_order",
+      "type": "action",
+      "action_type": "shopify/order/add_tags",
+      "tags": ["Measurement Delayed", "Buffer Slipped"],
+      "next": "step_end"
+    }
+  ]
+}
