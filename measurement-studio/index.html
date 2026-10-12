@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Étoile | Bespoke Measurement Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #0c0b09;
+      color: #ede8dc;
+    }
+    .font-serif-luxury {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #aa771c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-border {
+      border-color: rgba(212, 175, 55, 0.35);
+    }
+    .gold-btn {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      color: #0c0b09;
+    }
+    .gold-btn:hover {
+      background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8 flex items-center justify-center">
+
+  <div class="max-w-4xl w-full bg-[#14120e] border gold-border rounded-sm p-6 sm:p-10 shadow-2xl space-y-8">
+    
+    <!-- Header -->
+    <div class="border-b border-white/10 pb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <span class="text-[10px] uppercase tracking-[0.25em] text-[#d4af37]">Atelier Bespoke Fitting</span>
+        <h1 class="font-serif-luxury text-3xl sm:text-4xl text-white font-light tracking-wide mt-1">
+          Bespoke Measurement Studio
+        </h1>
+        <p class="text-xs text-white/60 mt-1">Order Ref: <span id="displayOrderNumber" class="text-white font-mono font-bold">#ME-8902</span> • Customer: <span class="text-white">Ashwika Agarwal</span></p>
+      </div>
+
+      <!-- Live 48-Hour Timer Box -->
+      <div class="bg-black/60 border gold-border px-5 py-3 rounded-sm text-center">
+        <span class="text-[9px] uppercase tracking-widest text-[#d4af37] block font-semibold">48-Hr Grace Window</span>
+        <span id="countdownTimer" class="font-mono text-xl text-white tracking-widest">47h : 54m : 22s</span>
+      </div>
+    </div>
+
+    <!-- Instructions & Video Consultation Banner -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs bg-black/40 p-5 rounded-sm border border-white/10">
+      <div class="space-y-1">
+        <h4 class="text-[#d4af37] font-semibold uppercase tracking-wider">1. Use Flexible Tape</h4>
+        <p class="text-white/60">Measure snug over undergarments. Do not hold your breath or pull the tape too tight.</p>
+      </div>
+      <div class="space-y-1">
+        <h4 class="text-[#d4af37] font-semibold uppercase tracking-wider">2. Account For Heels</h4>
+        <p class="text-white/60">Measure your lehenga waist-to-floor while wearing the bridal footwear you plan to wear.</p>
+      </div>
+      <div class="space-y-2 border-t md:border-t-0 md:border-l border-white/10 md:pl-4">
+        <h4 class="text-white font-semibold">Prefer a Stylist Video Call?</h4>
+        <p class="text-white/50">Schedule a 10-min guided appointment with our head tailor.</p>
+        <button onclick="bookStylistCall()" class="w-full py-1.5 border gold-border text-[#d4af37] text-[10px] uppercase tracking-wider hover:bg-[#d4af37]/10 transition">
+          Book Video Call →
+        </button>
+      </div>
+    </div>
+
+    <!-- The 8-Point Measurement Form -->
+    <form id="measurementForm" onsubmit="handleMeasurementSubmit(event)" class="space-y-6">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+        
+        <div class="space-y-1.5">
+          <label class="font-medium text-white flex justify-between">
+            <span>Bust (inches) *</span>
+            <span class="text-white/40 text-[10px]">Fullest part</span>
+          </label>
+          <input type="number" step="0.5" id="valBust" required placeholder="e.g. 36.0" 
+                 class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="font-medium text-white flex justify-between">
+            <span>Underbust (inches) *</span>
+            <span class="text-white/40 text-[10px]">Ribcage</span>
+          </label>
+          <input type="number" step="0.5" id="valUnderbust" required placeholder="e.g. 31.0" 
+                 class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="font-medium text-white flex justify-between">
+            <span>Natural Waist *</span>
+            <span class="text-white/40 text-[10px]">Above belly button</span>
+          </label>
+          <input type="number" step="0.5" id="valWaist" required placeholder="e.g. 28.5" 
+                 class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="font-medium text-white flex justify-between">
+            <span>High Hips (inches) *</span>
+            <span class="text-white/40 text-[10px]">Hip bones</span>
+          </label>
+          <input type="number" step="0.5" id="valHips" required placeholder="e.g. 38.0" 
+                 class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="font-medium text-white flex justify-between">
+            <span>Shoulder Width *</span>
+            <span class="text-white/40 text-[10px]">Bone to bone</span>
+          </label>
+          <input type="number" step="0.5" id="valShoulder" required placeholder="e.g. 14.5" 
+                 class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="font-medium text-white flex justify-between">
+            <span>Armhole (inches) *</span>
+            <span class="text-white/40 text-[10px]">Around shoulder</span>
+          </label>
+          <input type="number" step="0.5" id="valArmhole" required placeholder="e.g. 16.0" 
+                 class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="font-medium text-white flex justify-between">
+            <span>Blouse Length *</span>
+            <span class="text-white/40 text-[10px]">Shoulder to hem</span>
+          </label>
+          <input type="number" step="0.5" id="valBlouseLen" required placeholder="e.g. 14.5" 
+                 class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="font-medium text-white flex justify-between">
+            <span>Lehenga Length *</span>
+            <span class="text-white/40 text-[10px]">With heels to floor</span>
+          </label>
+          <input type="number" step="0.5" id="valLehengaLen" required placeholder="e.g. 42.0" 
+                 class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+
+      </div>
+
+      <!-- Additional Special Tailoring Notes -->
+      <div class="space-y-1 text-xs">
+        <label class="font-medium text-white">Custom Notes for Master Tailor (Optional)</label>
+        <textarea id="valTailorNotes" rows="2" placeholder="e.g., Deep back neckline preference, extra sleeve room, padded cups required..."
+                  class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none"></textarea>
+      </div>
+
+      <!-- Validation Error Banner -->
+      <div id="validationErrorBox" class="hidden p-3 bg-red-900/30 border border-red-500 rounded text-red-200 text-xs"></div>
+
+      <!-- Submit CTA -->
+      <div class="pt-2 flex flex-col sm:flex-row gap-4">
+        <button type="submit" class="flex-1 py-4 gold-btn text-xs font-bold uppercase tracking-widest rounded-sm shadow-lg">
+          Lock Measurements & Dispatch to Atelier →
+        </button>
+      </div>
+    </form>
+
+    <!-- Success Confirmation State -->
+    <div id="successPanel" class="hidden text-center py-8 space-y-4 border-t border-white/10">
+      <div class="w-14 h-14 mx-auto rounded-full bg-emerald-900/40 border border-emerald-500 flex items-center justify-center text-emerald-400 text-2xl font-bold">
+        ✓
+      </div>
+      <h3 class="font-serif-luxury text-3xl text-white font-light">Measurements Confirmed & Locked</h3>
+      <p class="text-xs text-white/60 max-w-md mx-auto">
+        Your anatomical tech-pack has been compiled. It is now routed to our master artisans for pure silk fabric cutting and zardozi embroidery.
+      </p>
+      <div class="inline-block p-3 bg-black/60 border gold-border rounded text-xs text-[#d4af37]">
+        Status: <strong class="text-white">Shopify Metafield Updated (bridal.measurement_status = 'VERIFIED')</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Live simulated countdown
+    let totalSeconds = 48 * 3600 - 320;
+    setInterval(() => {
+      if (totalSeconds <= 0) return;
+      totalSeconds--;
+      const h = Math.floor(totalSeconds / 3600);
+      const m = Math.floor((totalSeconds % 3600) / 60);
+      const s = totalSeconds % 60;
+      document.getElementById('countdownTimer').innerText = 
+        `${h}h : ${m < 10 ? '0' : ''}${m}m : ${s < 10 ? '0' : ''}${s}s`;
+    }, 1000);
+
+    function bookStylistCall() {
+      alert("Redirecting to Calendly / Google Meet booking for live stylist consultation.");
+    }
+
+    function handleMeasurementSubmit(e) {
+      e.preventDefault();
+      const errBox = document.getElementById('validationErrorBox');
+      errBox.classList.add('hidden');
+
+      const bust = parseFloat(document.getElementById('valBust').value);
+      const underbust = parseFloat(document.getElementById('valUnderbust').value);
+      const waist = parseFloat(document.getElementById('valWaist').value);
+      const hips = parseFloat(document.getElementById('valHips').value);
+
+      // Anatomical ratio sanity validation
+      if (underbust >= bust) {
+        errBox.innerText = "Validation Warning: Underbust measurement cannot be equal to or greater than the bust measurement.";
+        errBox.classList.remove('hidden');
+        return;
+      }
+
+      if (waist >= hips) {
+        errBox.innerText = "Validation Warning: Natural waist is typically smaller than high hips. Please double check.";
+        errBox.classList.remove('hidden');
+        return;
+      }
+
+      // Simulate payload to Shopify Admin GraphQL API updating Order Metafield
+      const payload = {
+        orderId: "gid://shopify/Order/8902",
+        metafields: [
+          {
+            namespace: "bridal",
+            key: "measurement_status",
+            value: "VERIFIED",
+            type: "single_line_text_field"
+          },
+          {
+            namespace: "bridal",
+            key: "measurements_json",
+            value: JSON.stringify({
+              bust,
+              underbust,
+              waist,
+              hips,
+              shoulder: parseFloat(document.getElementById('valShoulder').value),
+              armhole: parseFloat(document.getElementById('valArmhole').value),
+              blouseLength: parseFloat(document.getElementById('valBlouseLen').value),
+              lehengaLength: parseFloat(document.getElementById('valLehengaLen').value),
+              notes: document.getElementById('valTailorNotes').value,
+              submittedAt: new Date().toISOString()
+            }),
+            type: "json"
+          }
+        ]
+      };
+
+      console.log("Updating Shopify Metafields via Admin API:", payload);
+
+      document.getElementById('measurementForm').classList.add('hidden');
+      document.getElementById('successPanel').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
