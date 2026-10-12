@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Étoile | Haute Couture Bridal Atelier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0c0b09;
+      color: #ede8dc;
+    }
+    .font-serif-luxury {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #aa771c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-border {
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+    .gold-btn {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      color: #0c0b09;
+      transition: all 0.3s ease;
+    }
+    .gold-btn:hover {
+      background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-[#d4af37] selection:text-black">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-[#14120e] border-b gold-border text-center py-2 px-4 text-xs tracking-widest text-[#d4af37]/80 uppercase">
+    ✦ Bespoke Made-to-Order Couture • Complimentary Global Insured Shipping • Final Sale ✦
+  </div>
+
+  <!-- Navigation -->
+  <header class="border-b border-white/10 px-8 py-5 flex items-center justify-between sticky top-0 bg-[#0c0b09]/90 backdrop-blur-md z-40">
+    <div class="text-xs uppercase tracking-[0.25em] text-[#d4af37]">Private Label & Artisan Collective</div>
+    <div class="text-center">
+      <h1 class="font-serif-luxury text-3xl tracking-[0.15em] gold-gradient font-light">MAISON ÉTOILE</h1>
+      <p class="text-[9px] uppercase tracking-[0.3em] text-white/50">Haute Couture Bridal Atelier</p>
+    </div>
+    <div class="flex items-center space-x-6 text-xs tracking-wider">
+      <button class="hover:text-[#d4af37] transition">CURRENCY: USD ($)</button>
+      <button class="hover:text-[#d4af37] transition">CONCIERGE</button>
+      <div class="relative">
+        <span class="hover:text-[#d4af37] cursor-pointer">BAG (1)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Product Container -->
+  <main class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+    
+    <!-- LEFT: Editorial Gallery (7 cols) -->
+    <div class="lg:col-span-7 space-y-6">
+      <!-- Main Visual Showcase with Interactive Zoom Simulation -->
+      <div class="relative aspect-[3/4] bg-[#151310] rounded-sm overflow-hidden border gold-border group">
+        <img id="mainImage" 
+             src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=1200&q=85" 
+             alt="Couture Bridal Lehenga" 
+             class="w-full h-full object-cover object-top transition duration-700 ease-out group-hover:scale-105">
+        
+        <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3 py-1.5 border gold-border text-[10px] tracking-widest uppercase text-[#d4af37]">
+          Handcrafted • 280 Artisan Hours
+        </div>
+
+        <div class="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md p-3 border border-white/10 flex items-center justify-between text-xs">
+          <div>
+            <p class="text-white/80 font-serif-luxury text-sm">Pure Mulberry Silk & Antique Zardozi Work</p>
+            <p class="text-[10px] text-white/50 tracking-wider">Provenance: Master Guild, Varanasi & Old Delhi</p>
+          </div>
+          <button onclick="openRunwayVideo()" class="text-[10px] tracking-widest uppercase px-3 py-1 border gold-border text-[#d4af37] hover:bg-[#d4af37]/10 transition">
+            ▶ 360° Runway Drape
+          </button>
+        </div>
+      </div>
+
+      <!-- Thumbnail Strip -->
+      <div class="grid grid-cols-4 gap-4">
+        <button onclick="switchPhoto(0)" class="aspect-[3/4] border-2 border-[#d4af37] rounded-sm overflow-hidden opacity-100 transition thumb-btn">
+          <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </button>
+        <button onclick="switchPhoto(1)" class="aspect-[3/4] border border-white/20 rounded-sm overflow-hidden opacity-60 hover:opacity-100 transition thumb-btn">
+          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </button>
+        <button onclick="switchPhoto(2)" class="aspect-[3/4] border border-white/20 rounded-sm overflow-hidden opacity-60 hover:opacity-100 transition thumb-btn">
+          <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </button>
+        <button onclick="switchPhoto(3)" class="aspect-[3/4] border border-white/20 rounded-sm overflow-hidden opacity-60 hover:opacity-100 transition thumb-btn">
+          <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT: Product Specification & Order Architecture (5 cols) -->
+    <div class="lg:col-span-5 space-y-8 lg:pl-4">
+      <div>
+        <div class="flex items-center justify-between text-xs tracking-[0.2em] text-[#d4af37] uppercase mb-2">
+          <span>Royal Trousseau Collection</span>
+          <span>Limited Edition #07/15</span>
+        </div>
+        <h2 class="font-serif-luxury text-4xl text-white font-light tracking-wide leading-tight">
+          The Empress Noor Jahan Heritage Bridal Ensemble
+        </h2>
+        <div class="mt-3 flex items-baseline space-x-3">
+          <span class="text-2xl font-light tracking-wider text-[#d4af37]">$4,850 USD</span>
+          <span class="text-xs text-white/50 uppercase tracking-widest">(₹4,05,000 INR)</span>
+          <span class="text-[10px] text-white/40 tracking-wider">• 100% Upfront</span>
+        </div>
+      </div>
+
+      <div class="border-t border-b border-white/10 py-4 text-xs text-white/70 space-y-2 leading-relaxed">
+        <p>A masterpiece of bespoke Indian heritage: crimson velvet lehenga hand-embroidered with authentic gold dabka, badla, and freshwater pearls. Styled with an organza tissue dupatta and tailored velvet blouse.</p>
+      </div>
+
+      <!-- Mandatory Wedding Date Selector -->
+      <div class="bg-[#14120e] p-5 rounded-sm border gold-border space-y-3">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-semibold tracking-wider uppercase text-white flex items-center">
+            <span class="w-2 h-2 rounded-full bg-[#d4af37] inline-block mr-2 animate-pulse"></span>
+            Your Wedding / Event Date <span class="text-[#d4af37] ml-1">*</span>
+          </label>
+          <span id="bufferStatus" class="text-[10px] px-2 py-0.5 bg-[#d4af37]/10 text-[#d4af37] border gold-border uppercase tracking-widest">
+            Standard 6-Week Slot
+          </span>
+        </div>
+        <input type="date" id="eventDate" onchange="calculateDeliveryDate()" 
+               class="w-full bg-black/60 border border-white/20 px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#d4af37] transition">
+        <p id="timelineExplanation" class="text-[11px] text-white/50 leading-normal">
+          Select your wedding date. We require a minimum 5-week crafting window to complete hand-embroidery and precision tailoring.
+        </p>
+      </div>
+
+      <!-- Sizing Architecture: Standard vs. Custom Bespoke (Option C) -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between text-xs">
+          <span class="uppercase tracking-wider font-semibold text-white">Select Sizing Model</span>
+          <button onclick="openMeasurementGuide()" class="text-[#d4af37] underline text-[11px] hover:text-[#f3e5ab]">
+            Visual Measurement Guide
+          </button>
+        </div>
+
+        <!-- Mode Toggle Tabs -->
+        <div class="grid grid-cols-2 gap-2 p-1 bg-black/50 border border-white/10 rounded-sm">
+          <button id="tabStandard" onclick="selectSizeMode('standard')" 
+                  class="py-2.5 text-xs uppercase tracking-wider font-medium text-white/60 hover:text-white transition">
+            Standard Size (XS–3XL)
+          </button>
+          <button id="tabCustom" onclick="selectSizeMode('custom')" 
+                  class="py-2.5 text-xs uppercase tracking-wider font-semibold bg-[#d4af37] text-black shadow transition">
+            Custom Bespoke Fit ✨
+          </button>
+        </div>
+
+        <!-- Panel A: Standard Size Selector -->
+        <div id="standardSizePanel" class="hidden space-y-3 pt-2">
+          <div class="grid grid-cols-6 gap-2">
+            <button class="size-btn py-2 text-xs border border-white/20 hover:border-[#d4af37] transition">XS</button>
+            <button class="size-btn py-2 text-xs border border-white/20 hover:border-[#d4af37] transition">S</button>
+            <button class="size-btn py-2 text-xs border border-[#d4af37] bg-[#d4af37]/20 text-white font-bold">M</button>
+            <button class="size-btn py-2 text-xs border border-white/20 hover:border-[#d4af37] transition">L</button>
+            <button class="size-btn py-2 text-xs border border-white/20 hover:border-[#d4af37] transition">XL</button>
+            <button class="size-btn py-2 text-xs border border-white/20 hover:border-[#d4af37] transition">2XL</button>
+          </div>
+          <p class="text-[10px] text-white/40 italic">
+            * All standard sizes include a 3-inch internal seam allowance for easy alteration.
+          </p>
+        </div>
+
+        <!-- Panel B: Custom Bespoke (Flexible 48-Hour Model) -->
+        <div id="customSizePanel" class="p-4 bg-[#181510] border border-[#d4af37]/50 rounded-sm space-y-3">
+          <div class="flex items-start space-x-3">
+            <div class="text-[#d4af37] text-lg">✦</div>
+            <div>
+              <h4 class="text-xs uppercase tracking-wider font-semibold text-[#d4af37]">
+                The 48-Hour Flexible Sizing Guarantee
+              </h4>
+              <p class="text-[11px] text-white/70 mt-1 leading-relaxed">
+                You do not need your measurements right now. Order today to lock your artisan production slot. You will have <strong>48 hours</strong> to submit measurements via our visual studio or schedule a video call with our stylist.
+              </p>
+            </div>
+          </div>
+          <div class="pt-2 flex items-center justify-between text-[11px] border-t border-white/10">
+            <span class="text-white/60">Have measurements ready now?</span>
+            <button onclick="openMeasurementModal()" class="text-[#d4af37] hover:underline font-medium">
+              Enter Measurements Now →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Sale & Policy Consent -->
+      <div class="bg-black/40 p-4 border border-white/10 rounded-sm space-y-2">
+        <label class="flex items-start space-x-3 cursor-pointer">
+          <input type="checkbox" id="policyConsent" class="mt-1 accent-[#d4af37] w-4 h-4 rounded">
+          <span class="text-[11px] text-white/80 leading-normal">
+            I understand that this bespoke bridal couture piece is crafted specifically to my order and is strictly <strong>Final Sale</strong> (No returns or refunds once production commences).
+          </span>
+        </label>
+      </div>
+
+      <!-- Action Button -->
+      <div class="space-y-3">
+        <button id="checkoutBtn" onclick="handleReserveOrder()" 
+                class="w-full py-4 text-xs uppercase tracking-[0.2em] font-semibold gold-btn rounded-sm shadow-lg">
+          Reserve Bespoke Order • $4,850 USD
+        </button>
+        <div class="flex items-center justify-center space-x-6 text-[10px] text-white/40 uppercase tracking-widest">
+          <span>✓ Insured Air Courier</span>
+          <span>✓ 100% Upfront Secure</span>
+          <span>✓ Direct Master Artisan</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL: 48-Hour Measurement Concierge Studio -->
+  <div id="measurementModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#12100d] border gold-border rounded-sm max-w-2xl w-full p-8 relative max-h-[90vh] overflow-y-auto space-y-6">
+      <button onclick="closeMeasurementModal()" class="absolute top-6 right-6 text-white/50 hover:text-white text-xl">✕</button>
+      
+      <div class="text-center space-y-1">
+        <span class="text-[10px] tracking-[0.25em] uppercase text-[#d4af37]">Atelier Tailoring Studio</span>
+        <h3 class="font-serif-luxury text-3xl text-white font-light">Custom Anatomical Measurements</h3>
+        <p class="text-xs text-white/60">Measure snug over undergarments with a flexible measuring tape.</p>
+      </div>
+
+      <!-- Measurement Inputs Form -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
+        <div class="space-y-1">
+          <label class="text-white/80 font-medium">Bust (inches)</label>
+          <input type="number" placeholder="e.g. 36" class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+        <div class="space-y-1">
+          <label class="text-white/80 font-medium">Underbust (inches)</label>
+          <input type="number" placeholder="e.g. 31" class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+        <div class="space-y-1">
+          <label class="text-white/80 font-medium">Natural Waist (inches)</label>
+          <input type="number" placeholder="e.g. 28" class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+        <div class="space-y-1">
+          <label class="text-white/80 font-medium">High Hips (inches)</label>
+          <input type="number" placeholder="e.g. 38" class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+        <div class="space-y-1">
+          <label class="text-white/80 font-medium">Blouse Length (inches)</label>
+          <input type="number" placeholder="e.g. 14.5" class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+        <div class="space-y-1">
+          <label class="text-white/80 font-medium">Lehenga Waist-to-Floor</label>
+          <input type="number" placeholder="e.g. 42 (with heels)" class="w-full bg-black/60 border border-white/20 p-2.5 text-white focus:border-[#d4af37] outline-none">
+        </div>
+      </div>
+
+      <div class="p-4 bg-black/40 border border-white/10 flex items-center justify-between text-xs">
+        <div>
+          <p class="font-medium text-white">Prefer professional guidance?</p>
+          <p class="text-[11px] text-white/50">Schedule a 1-on-1 virtual video appointment with our head stylist.</p>
+        </div>
+        <button class="px-4 py-2 border gold-border text-[#d4af37] uppercase text-[10px] tracking-wider hover:bg-[#d4af37]/10 transition">
+          Book Video Call
+        </button>
+      </div>
+
+      <div class="flex space-x-4">
+        <button onclick="closeMeasurementModal()" class="flex-1 py-3 text-xs uppercase tracking-wider bg-white/10 hover:bg-white/20 transition text-white">
+          Save for Later (Use 48-Hr Grace)
+        </button>
+        <button onclick="saveMeasurements()" class="flex-1 py-3 text-xs uppercase tracking-wider gold-btn font-semibold">
+          Confirm Measurements
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER SUCCESS / 48-HR COUNTDOWN DRAWER -->
+  <div id="orderSuccessModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#12100d] border-2 gold-border rounded-sm max-w-xl w-full p-8 text-center space-y-6">
+      <div class="w-16 h-16 mx-auto rounded-full bg-[#d4af37]/20 border gold-border flex items-center justify-center text-[#d4af37] text-2xl">
+        ✓
+      </div>
+      <div>
+        <span class="text-[10px] uppercase tracking-[0.25em] text-[#d4af37]">Atelier Booking Confirmed</span>
+        <h3 class="font-serif-luxury text-3xl text-white font-light mt-1">Production Slot Locked</h3>
+        <p class="text-xs text-white/60 mt-2 leading-relaxed">
+          Order #ME-8902 has been successfully received with 100% upfront payment ($4,850 USD). Raw silk procurement and artisan guild allocation has started.
+        </p>
+      </div>
+
+      <!-- Live 48-Hour Countdown -->
+      <div class="p-4 bg-[#181510] border gold-border rounded-sm">
+        <p class="text-[10px] uppercase tracking-widest text-[#d4af37] mb-2">48-Hour Measurement Window Remaining</p>
+        <div class="font-mono text-2xl text-white tracking-widest" id="countdownTimer">
+          47h : 59m : 54s
+        </div>
+        <p class="text-[10px] text-white/50 mt-2">
+          A direct link has also been dispatched to your WhatsApp and Email.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <button onclick="openMeasurementModal(); closeOrderSuccessModal();" class="w-full py-3 text-xs uppercase tracking-wider gold-btn font-semibold">
+          Complete Measurements Now
+        </button>
+        <button onclick="closeOrderSuccessModal()" class="w-full py-2.5 text-xs uppercase tracking-wider text-white/50 hover:text-white transition">
+          Return to Atelier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentSizeMode = 'custom';
+    const photos = [
+      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1200&q=85"
+    ];
+
+    function switchPhoto(index) {
+      document.getElementById('mainImage').src = photos[index];
+      const thumbs = document.querySelectorAll('.thumb-btn');
+      thumbs.forEach((t, i) => {
+        if (i === index) {
+          t.classList.add('border-[#d4af37]', 'opacity-100');
+          t.classList.remove('border-white/20', 'opacity-60');
+        } else {
+          t.classList.remove('border-[#d4af37]', 'opacity-100');
+          t.classList.add('border-white/20', 'opacity-60');
+        }
+      });
+    }
+
+    function selectSizeMode(mode) {
+      currentSizeMode = mode;
+      const tabStd = document.getElementById('tabStandard');
+      const tabCust = document.getElementById('tabCustom');
+      const panelStd = document.getElementById('standardSizePanel');
+      const panelCust = document.getElementById('customSizePanel');
+
+      if (mode === 'standard') {
+        tabStd.classList.add('bg-[#d4af37]', 'text-black', 'font-semibold');
+        tabStd.classList.remove('text-white/60');
+        tabCust.classList.remove('bg-[#d4af37]', 'text-black', 'font-semibold');
+        tabCust.classList.add('text-white/60');
+        panelStd.classList.remove('hidden');
+        panelCust.classList.add('hidden');
+      } else {
+        tabCust.classList.add('bg-[#d4af37]', 'text-black', 'font-semibold');
+        tabCust.classList.remove('text-white/60');
+        tabStd.classList.remove('bg-[#d4af37]', 'text-black', 'font-semibold');
+        tabStd.classList.add('text-white/60');
+        panelCust.classList.remove('hidden');
+        panelStd.classList.add('hidden');
+      }
+    }
+
+    function calculateDeliveryDate() {
+      const dateVal = document.getElementById('eventDate').value;
+      if (!dateVal) return;
+      const eventDate = new Date(dateVal);
+      const today = new Date();
+      const diffTime = eventDate - today;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const statusBadge = document.getElementById('bufferStatus');
+      const expText = document.getElementById('timelineExplanation');
+
+      if (diffDays < 28) {
+        statusBadge.innerText = "⚠️ Rush Order (+15%)";
+        statusBadge.className = "text-[10px] px-2 py-0.5 bg-red-900/40 text-red-300 border border-red-500 uppercase tracking-widest";
+        expText.innerText = `Event in ${diffDays} days! Requires priority artisan overtime to guarantee delivery before your event.`;
+      } else if (diffDays <= 45) {
+        statusBadge.innerText = "Priority Buffer Active";
+        statusBadge.className = "text-[10px] px-2 py-0.5 bg-amber-900/40 text-amber-300 border border-amber-500 uppercase tracking-widest";
+        expText.innerText = `Event in ${diffDays} days. Production timeline is tight but guaranteed. Dispatch scheduled 10 days prior.`;
+      } else {
+        statusBadge.innerText = "Comfortable Buffer ✅";
+        statusBadge.className = "text-[10px] px-2 py-0.5 bg-emerald-900/40 text-emerald-300 border border-emerald-500 uppercase tracking-widest";
+        expText.innerText = `Event in ${diffDays} days. Perfect timeline for complete bespoke embroidery and multi-stage QC.`;
+      }
+    }
+
+    function handleReserveOrder() {
+      const eventDate = document.getElementById('eventDate').value;
+      const consent = document.getElementById('policyConsent').checked;
+
+      if (!eventDate) {
+        alert("Please specify your wedding or event date to ensure production scheduling.");
+        document.getElementById('eventDate').focus();
+        return;
+      }
+
+      if (!consent) {
+        alert("Please acknowledge the Final Sale & Bespoke agreement before placing your order.");
+        document.getElementById('policyConsent').focus();
+        return;
+      }
+
+      document.getElementById('orderSuccessModal').classList.remove('hidden');
+      startCountdown();
+    }
+
+    function openMeasurementModal() {
+      document.getElementById('measurementModal').classList.remove('hidden');
+    }
+
+    function closeMeasurementModal() {
+      document.getElementById('measurementModal').classList.add('hidden');
+    }
+
+    function closeOrderSuccessModal() {
+      document.getElementById('orderSuccessModal').classList.add('hidden');
+    }
+
+    function saveMeasurements() {
+      alert("Measurements submitted! Tech pack generated for master tailoring workshop.");
+      closeMeasurementModal();
+    }
+
+    function openRunwayVideo() {
+      alert("Simulating 360° runway video drape preview.");
+    }
+
+    function openMeasurementGuide() {
+      openMeasurementModal();
+    }
+
+    function startCountdown() {
+      let totalSeconds = 48 * 3600 - 6;
+      setInterval(() => {
+        if (totalSeconds <= 0) return;
+        totalSeconds--;
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        const el = document.getElementById('countdownTimer');
+        if (el) {
+          el.innerText = `${hours}h : ${minutes < 10 ? '0' : ''}${minutes}m : ${seconds < 10 ? '0' : ''}${seconds}s`;
+        }
+      }, 1000);
+    }
+
+    // Set default wedding date 60 days ahead
+    window.addEventListener('DOMContentLoaded', () => {
+      const d = new Date();
+      d.setDate(d.getDate() + 65);
+      document.getElementById('eventDate').value = d.toISOString().split('T')[0];
+      calculateDeliveryDate();
+    });
+  </script>
+</body>
+</html>
