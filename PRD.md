@@ -194,27 +194,34 @@ erDiagram
 
 ---
 
-## 6. Technical & Non-Functional Requirements (NFRs)
+## 6. Technical Stack & Security Architecture (Shopify Platform)
 
-* **Performance:** First Contentful Paint (FCP) < 1.2s; imagery lazy-loaded via CDN with modern AVIF/WebP formats.
-* **Security & Compliance:** PCI-DSS Level 1 compliant payment gateways; 3D Secure 2.0 mandatory for all transactions.
-* **Audit Trail:** Immutable logging of customer "Final Sale" checkbox agreement (IP address, user agent, timestamp) for chargeback defense.
-* **Disaster Recovery:** Automated daily database backups with 99.9% uptime SLA.
+* **Core Platform:** Shopify Plus / Advanced Shopify with Online Store 2.0.
+* **Theme Architecture:** Custom Liquid Theme extending Shopify Dawn (tailored for luxury editorial speed, zero layout shift, FCP < 1.1s).
+* **Custom Applications:**
+  * **Measurement Studio:** Shopify App Proxy (`/apps/measurements`) built with Node.js/Remix and Tailwind CSS.
+  * **Artisan Vendor Portal:** Custom Shopify App (Node.js/Remix + Prisma) utilizing Shopify Admin GraphQL API.
+* **Data Layer:** Shopify Native Metafields & Metaobjects for Custom Measurements, Sizing Modes, Vendor Assignments, and QC Photos.
+* **Workflow Automation:** Shopify Flow + WhatsApp Business API (Twilio / Gallabox) + Klaviyo for 48-hour automated reminders.
+* **Payments & Compliance:** Shopify Payments (Stripe-backed) with 3D Secure 2.0, multi-currency conversion, and PCI-DSS Level 1 compliance.
+* **Legal Audit Trail:** Shopify Checkout Extensibility enforcing mandatory "Final Sale" checkbox with timestamp, IP, and customer consent stored in Order Attributes.
 
 ---
 
-## 7. Phased Release Roadmap
+## 7. Phased Release Roadmap (Shopify 10-Week Delivery)
 
-* **MVP v1.0 (Current Scope):**
-  * Core Editorial Storefront & PDP
-  * Flexible 48-Hour Bespoke Sizing + Event Date Buffer Engine
-  * 100% Upfront Stripe/Razorpay Checkout
-  * Self-Service Vendor Portal & PDF Tech-Pack Generator
-  * Central Atelier QC Checklist
+* **MVP v1.0 (Weeks 1–10):**
+  * Custom Liquid Editorial Theme & PDP
+  * Line Item Property Sizing Switcher (Standard vs. Custom Bespoke)
+  * Event Date Buffer Engine in cart/checkout
+  * Shopify App Proxy Measurement Studio
+  * Shopify Flow Automated 48-Hour Reminder Webhooks
+  * Custom Vendor Portal with PDF Tech-Pack Generator
+  * Central Atelier 5-Point QC Admin Scanner
+  * DHL / FedEx Shipping App Integration
 * **v1.1 (Enhancement):**
-  * WhatsApp Concierge integration for automated 48-hour reminders.
-  * Virtual Bridal Stylist appointment booking (Calendly / Zoom sync).
-  * Swatch kit sample order flow.
+  * Virtual Styling Video Appointments (Calendly embed inside measurement proxy)
+  * Fabric swatch sample box checkout
 * **v2.0 (Scale):**
-  * AI-powered measurement verification (computer vision estimation from photos).
-  * Multi-currency international customs/duties pre-calculation.
+  * AI-powered body measurement estimation from photos
+  * Multi-region international customs & duties calculator
