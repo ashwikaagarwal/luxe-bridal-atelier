@@ -1,50 +1,58 @@
 # Maison Étoile — Luxe Bridal Atelier
 
-> **Haute Couture Bridal E-Commerce & Artisan Platform**  
-> An elite digital bridal salon delivering bespoke, handcrafted luxury wedding couture to brides worldwide through a hybrid private-label and local artisan workshop model.
+> **Haute Couture Bridal E-Commerce & Artisan Platform on Shopify**  
+> An elite digital bridal salon delivering bespoke, handcrafted luxury wedding couture through a hybrid private-label and local artisan workshop model.
 
 ---
 
-## 🌟 Key Features
-
-* **Flexible 48-Hour Bespoke Sizing (Option C):** Brides can reserve high-demand artisan production slots instantly with 100% upfront payment, and submit custom body measurements anytime within 48 hours via a self-guided measurement studio or virtual stylist video call.
-* **Dynamic Event Date Buffer Calculator:** Guarantees timely delivery by calculating production buffers against the bride's wedding date (requires minimum 5–6 weeks buffer; automatic rush surcharge for tight deadlines).
-* **Self-Service Artisan Vendor Portal:** Enables local master workshops and embroiderers to accept orders, download standardized measurement tech-packs (PDF), and log milestone progress.
-* **Central Atelier 5-Point Quality Control:** Incoming vendor pieces undergo a rigorous 5-point physical verification (measurement check with tape, stitch tension, fabric integrity, stain inspection) before white-glove packaging.
-* **Binding Final Sale & Upfront Payment:** Protects custom craftsmanship costs and reduces chargeback risks with explicit legal acknowledgment.
-
----
-
-## 📁 Repository Structure
+## 🌟 Architecture & Implemented Modules
 
 ```
 luxe-bridal/
-├── index.html       # Interactive Luxury Bridal Product Experience Prototype
-├── BRD.md           # Business Requirement Document (Vision, Market, Model)
-├── PRD.md           # Product Requirement Document (Epics, User Stories, Schemas)
-└── README.md        # Project Overview & Architecture Guide
+├── shopify-theme/                   # Shopify Online Store 2.0 Theme Components
+│   ├── snippets/
+│   │   └── bridal-sizing-selector.liquid    # Dual sizing toggle & wedding date buffer
+│   ├── sections/
+│   │   └── main-bridal-product.liquid       # Luxury editorial PDP section
+│   └── assets/
+│       ├── bridal-atelier.css               # Haute couture luxury styling
+│       └── bridal-atelier.js                # Buffer validation & final sale gating
+├── measurement-studio/              # Shopify App Proxy Portal (/apps/measurements)
+│   └── index.html                           # 8-metric client form, 48h countdown & ratio checks
+├── vendor-portal/                   # Self-Service Artisan Workshop Portal
+│   └── index.html                           # Assigned order queue, 1-click tech-pack & milestones
+├── central-qc-hub/                  # Central Atelier Quality Control Station
+│   └── index.html                           # Barcode scanner, 5-point QC checklist & DHL label trigger
+├── shopify-flow/                    # Workflow Automation
+│   └── 48h-reminder-workflow.json           # Importable 48-hour WhatsApp/Email reminder sequence
+├── BRD.md                           # Business Requirement Document
+├── PRD.md                           # Product Requirement Document
+├── Implementation_Plan.md           # 10-Week Shopify Implementation Roadmap
+└── Shopify_Execution_Guide.md       # Developer CLI & Technical Execution Guide
 ```
 
 ---
 
-## 📖 Product Documentation
+## 🚀 Key Functional Capabilities
 
-* **[Business Requirement Document (BRD)](BRD.md):** Market opportunity, luxury positioning, hybrid supply chain, and business rules.
-* **[Product Requirement Document (PRD)](PRD.md):** Detailed epics, acceptance criteria, entity-relationship models, and release roadmap.
+1. **48-Hour Flexible Bespoke Sizing (Option C):**
+   * Brides can lock their master artisan's production slot immediately with 100% upfront payment, and submit measurements within 48 hours via `/apps/measurements`.
+2. **Dynamic Wedding Date Buffer Calculator:**
+   * Calculates days until event and alerts customers if their date is comfortable (≥45 days), tight (28–44 days), or requires an express rush fee (<28 days).
+3. **Mandatory Final Sale Legal Gating:**
+   * Enforced in both theme JavaScript and checkout validation rules to protect custom crafting capital.
+4. **Self-Service Artisan Workshop Portal:**
+   * Local embroiderers and tailors log in, view assigned orders, download printable PDF tech-packs with exact measurements, and update crafting stages (*Cut ➔ Embroidered ➔ Tailored ➔ Dispatched*).
+5. **Central Atelier 5-Point Quality Control:**
+   * Physical tape measurement verification (tolerance ±0.5"), stitch tension check, daylight lamp inspection, and mandatory photo archival before automated DHL Express label generation.
+6. **Automated Shopify Flow Reminder Pipeline:**
+   * Webhook sequence triggering WhatsApp reminders at T+0h, T+24h, and T+40h for pending measurements.
 
 ---
 
-## 🛠️ Technology Stack
+## 📖 Documentation Quicklinks
 
-* **Frontend:** HTML5, Tailwind CSS, JavaScript (Next.js & React ready)
-* **Design System:** Editorial typography (Cormorant Garamond + Montserrat), champagne gold accents, high-contrast dark luxury palette
-* **Backend Target:** MedusaJS / Headless Commerce with PostgreSQL
-* **Integrations:** Stripe / Razorpay (3D Secure), Twilio / WhatsApp Business API, Cloudinary (4K media zoom)
-
----
-
-## 🚀 Getting Started
-
-To preview the interactive prototype:
-1. Open `index.html` in any modern web browser.
-2. Select your event date, toggle between standard and custom bespoke sizing, and test the 48-hour measurement grace countdown drawer.
+* 📋 **[Product Requirement Document (PRD)](PRD.md)**
+* 💼 **[Business Requirement Document (BRD)](BRD.md)**
+* 🗺️ **[10-Week Implementation Plan](Implementation_Plan.md)**
+* 🛠️ **[Shopify Execution Guide](Shopify_Execution_Guide.md)**
