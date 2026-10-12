@@ -1,0 +1,87 @@
+{% comment %}
+  Bridal Sizing & Event Date Selector Module
+  Renders dual sizing options (Standard vs. Custom Bespoke with 48h grace)
+  and captures event date with production buffer validation.
+{% endcomment %}
+
+<div class="bridal-sizing-module" data-lead-weeks="{{ product.metafields.craftsmanship.lead_time_weeks.value | default: 6 }}">
+  
+  <!-- Sizing Mode Header -->
+  <div class="bridal-field-header">
+    <label class="bridal-label">Sizing Selection <span class="required-star">*</span></label>
+    <button type="button" class="bridal-guide-link" onclick="openMeasurementGuideModal()">
+      Visual Sizing Guide →
+    </button>
+  </div>
+
+  <!-- Sizing Mode Toggle Tabs -->
+  <div class="sizing-toggle-grid">
+    <button type="button" id="tabStandard" class="size-tab-btn active" onclick="switchSizingMode('Standard')">
+      Standard Sizes (XS–3XL)
+    </button>
+    <button type="button" id="tabBespoke" class="size-tab-btn" onclick="switchSizingMode('Custom Bespoke')">
+      Custom Bespoke (48-Hr Grace) ✨
+    </button>
+  </div>
+
+  <!-- Hidden input passed to Shopify Cart as Line Item Property -->
+  <input type="hidden" name="properties[_SizingMode]" id="bridalSizingModeInput" value="Standard">
+
+  <!-- Panel 1: Standard Size Pills -->
+  <div id="panelStandardSizes" class="standard-sizes-panel">
+    <div class="size-pills-row">
+      {% assign standard_sizes = 'XS,S,M,L,XL,2XL,3XL' | split: ',' %}
+      {% for sz in standard_sizes %}
+        <label class="size-pill-label">
+          <input type="radio" name="properties[Standard Size]" value="{{ sz }}" {% if sz == 'M' %}checked{% endif %}>
+          <span class="size-pill-box">{{ sz }}</span>
+        </label>
+      {% endfor %}
+    </div>
+    <p class="size-help-text">
+      * All standard sizes include a <strong>3-inch internal seam allowance</strong> for effortless local alterations.
+    </p>
+  </div>
+
+  <!-- Panel 2: Custom Bespoke 48-Hour Guarantee Box -->
+  <div id="panelBespokeNotice" class="bespoke-notice-panel hidden">
+    <div class="bespoke-card">
+      <div class="bespoke-icon">✦</div>
+      <div class="bespoke-body">
+        <h4 class="bespoke-title">The 48-Hour Flexible Sizing Guarantee</h4>
+        <p class="bespoke-desc">
+          You do not need your measurements right now. Pay 100% upfront today to secure your artisan production slot. You will have <strong>48 hours</strong> to submit measurements via our self-guided studio or schedule a video call with our master stylist.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wedding / Event Date Input -->
+  <div class="event-date-card">
+    <div class="event-date-header">
+      <label class="bridal-label" for="bridalWeddingDate">
+        <span class="status-pulse-dot"></span>
+        Wedding / Event Date <span class="required-star">*</span>
+      </label>
+      <span id="bufferStatusBadge" class="buffer-badge buffer-good">
+        Comfortable Buffer
+      </span>
+    </div>
+    <input type="date" id="bridalWeddingDate" name="properties[Wedding Date]" required 
+           class="bridal-input" onchange="validateEventBuffer(this.value)">
+    <p id="bufferExplainerText" class="buffer-explainer">
+      Select your wedding date to calculate guaranteed crafting and shipping buffers.
+    </p>
+  </div>
+
+  <!-- Mandatory Final Sale Legal Consent -->
+  <div class="final-sale-consent-box">
+    <label class="checkbox-container">
+      <input type="checkbox" id="finalSaleConsentInput" name="properties[_FinalSaleAcknowledged]" value="Yes" required>
+      <span class="consent-text">
+        I acknowledge and agree that this couture garment is custom made-to-order and is strictly <strong>Final Sale</strong> (No cancellations, returns, or refunds once artisan crafting commences).
+      </span>
+    </label>
+  </div>
+
+</div>
