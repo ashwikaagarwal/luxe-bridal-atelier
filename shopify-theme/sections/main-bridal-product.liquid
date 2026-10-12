@@ -1,0 +1,123 @@
+{{ 'bridal-atelier.css' | asset_url | stylesheet_tag }}
+{{ 'bridal-atelier.js' | asset_url | script_tag }}
+
+<section class="bridal-product-section" data-section-id="{{ section.id }}">
+  <div class="bridal-container">
+    
+    <!-- Left Column: Editorial Media Showcase -->
+    <div class="bridal-gallery-column">
+      <div class="main-image-frame">
+        {% if product.featured_image %}
+          <img id="bridalMainMedia" 
+               src="{{ product.featured_image | image_url: width: 1200 }}" 
+               alt="{{ product.title | escape }}"
+               class="bridal-hero-image"
+               loading="eager">
+        {% else %}
+          <div class="placeholder-media">Couture Bridal Image</div>
+        {% endif %}
+
+        <!-- Artisan Metadata Overlay -->
+        <div class="media-artisan-badge">
+          <span>✦ Handcrafted • {{ product.metafields.craftsmanship.hours.value | default: 280 }} Artisan Hours</span>
+        </div>
+      </div>
+
+      <!-- Thumbnail Row -->
+      <div class="thumbnails-strip">
+        {% for image in product.images %}
+          <button type="button" class="thumb-item {% if forloop.first %}active{% endif %}" 
+                  onclick="document.getElementById('bridalMainMedia').src='{{ image | image_url: width: 1200 }}'">
+            <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | escape }}">
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Right Column: Product Detail & Purchase Architecture -->
+    <div class="bridal-details-column">
+      
+      <!-- Provenance Header -->
+      <div class="provenance-tag">
+        {{ product.metafields.craftsmanship.artisan_guild.value | default: 'Master Guild, Varanasi & Old Delhi' }}
+      </div>
+
+      <h1 class="bridal-title">{{ product.title }}</h1>
+
+      <!-- Pricing & Terms -->
+      <div class="price-row">
+        <span class="main-price">{{ product.price | money_with_currency }}</span>
+        <span class="terms-pill">100% Upfront • Bespoke Order</span>
+      </div>
+
+      <!-- Description -->
+      <div class="bridal-description">
+        {{ product.description }}
+      </div>
+
+      <!-- Shopify Native Product Form -->
+      {% form 'product', product, id: 'bridalProductForm', class: 'bridal-form' %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <!-- Bridal Sizing & Date Selector Snippet -->
+        {% render 'bridal-sizing-selector', product: product %}
+
+        <!-- Add to Bag / Reserve Order CTA -->
+        <button type="submit" name="add" class="bridal-reserve-button">
+          Reserve Bespoke Order • {{ product.price | money_with_currency }}
+        </button>
+
+        <div class="trust-features-row">
+          <span>✓ Insured Air Courier</span>
+          <span>✓ 100% Upfront Secure</span>
+          <span>✓ Direct Master Artisan</span>
+        </div>
+      {% endform %}
+
+      <!-- Accordion: Craftsmanship & Guarantee Details -->
+      <div class="bridal-accordion">
+        <details class="accordion-item" open>
+          <summary class="accordion-header">The 48-Hour Flexible Sizing Policy</summary>
+          <div class="accordion-content">
+            <p>Our bespoke orders grant a 48-hour post-purchase grace window to submit your measurements. This allows you to lock your master tailor's schedule immediately during high wedding season without waiting to be measured.</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Artisan Provenance & Materials</summary>
+          <div class="accordion-content">
+            <p>Hand-embroidered using authentic bullion gold wire (Zardozi), freshwater pearls, and badla sequins over pure mulberry silk velvet. Sourced directly from certified traditional artisan guilds.</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Delivery & White-Glove QC</summary>
+          <div class="accordion-content">
+            <p>Every piece undergoes a 5-point physical measurement inspection at our central atelier prior to packaging. Dispatched in archival-grade bridal preservation boxes via insured priority air freight.</p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bridal Luxury Product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_zoom",
+      "label": "Enable 2x Media Zoom",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bridal Luxury Product"
+    }
+  ]
+}
+{% endschema %}
